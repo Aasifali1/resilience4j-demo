@@ -33,27 +33,23 @@ resilience4j:
     instances:
       user-service:
         maxRetryAttempts: 3
-        waitDuration: 10s
-        retryExceptions:
-          - org.springframework.web.client.HttpServerErrorException
-          - java.io.IOException
+        waitDuration: 5s
+
   bulkhead:
     instances:
       user-service:
-        maxConcurrentCalls: 10
-      backendB:
         maxWaitDuration: 10ms
-        maxConcurrentCalls: 20
+        maxConcurrentCalls: 10
 
   ratelimiter:
     instances:
       user-service:
-        limitForPeriod: 6
-        limitRefreshPeriod: 500ms
-        timeoutDuration: 3s
+        limitForPeriod: 2
+        limitRefreshPeriod: 4s
+        timeoutDuration: 4s
 
   timelimiter:
     instances:
       user-service:
-        cancelRunningFuture: false
+        cancelRunningFuture: true
         timeoutDuration: 2s
